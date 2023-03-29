@@ -22,7 +22,11 @@ function App() {
         setData(view);
       };
 
-      fetch("http://localhost:3000/3dmodel").then(handleFetch);
+      const handleError = async (err: Error) => {
+        console.error("Error fetching model.", err);
+      };
+
+      fetch("http://localhost:3000/3dmodel").then(handleFetch, handleError);
     };
 
     void f();
