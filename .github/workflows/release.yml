@@ -1,0 +1,40 @@
+name: Deploy frontend client to Elastic Beanstalk
+on:
+  push:
+    branches:
+      - master
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [17.x]
+    steps:
+      - name: checkout latest code version
+        uses: actions/checkout@v3
+      - name: generate deployment package
+        run: zip -r deploy.zip * -x "**.git**"
+      - name: get current timestamp
+        uses: gerred/actions/current-time@master
+        id: current-time
+      - name: replace string
+        uses: frabert/replace-string-action@master
+        id: format-time
+        with:
+          pattern: '[:\.]+'
+          string: "${{ steps.current-time.outputs.time }}"
+          replace-with: "-"
+          flags: "g"
+      - name: deploy
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: "${{ secrets.ACCESS_KEY }}"
+          aws_secret_key: "${{ secrets.SECRET_KEY }}"
+          application_name: "showroom"
+          environment_name: "showroom-main"
+          version_label: "showroom-${{ steps.format-time.outputs.replaced }}"
+          region: eu-north-1
+          deployment_package: deploy.zip
+      - name: Deployed successfully
+        run: echo Frontend client successfully deployed to Elastic
