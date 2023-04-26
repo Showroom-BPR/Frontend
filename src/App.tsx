@@ -20,7 +20,9 @@ function App() {
         setRaw(bytes);
       };
 
-      fetch("http://localhost:3000/3dmodel").then(handleFetch, onError);
+      fetch(
+        "http://localhost:3000/3dmodel?username=Showroom&productId=mario"
+      ).then(handleFetch, onError);
     };
 
     void f();
