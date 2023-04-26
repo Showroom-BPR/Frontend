@@ -21,7 +21,7 @@ function App() {
       };
 
       fetch(
-        "http://localhost:3000/3dmodel?username=Showroom&productId=mario"
+        "http://localhost:82/3DAsset?username=JaneDoe&productId=mario"
       ).then(handleFetch, onError);
     };
 
