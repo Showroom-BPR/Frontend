@@ -6,10 +6,7 @@ import { Canvas } from "@react-three/fiber";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Canvas
-      gl={{ antialias: false, stencil: false }}
-      camera={{ position: [2, 0, 0], fov: 60 }}
-    >
+    <Canvas gl={{ antialias: true, stencil: true }}>
       <App />
     </Canvas>
   </React.StrictMode>
