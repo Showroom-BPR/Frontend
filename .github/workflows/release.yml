@@ -32,7 +32,7 @@ jobs:
           aws_access_key: "${{ secrets.ACCESS_KEY }}"
           aws_secret_key: "${{ secrets.SECRET_KEY }}"
           application_name: "showroom"
-          environment_name: "showroom-main"
+          environment_name: "showroom"
           version_label: "showroom-${{ steps.format-time.outputs.replaced }}"
           region: eu-north-1
           deployment_package: deploy.zip
