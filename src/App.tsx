@@ -2,6 +2,10 @@ import { OrbitControls, Stage } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
+const backend = import.meta.env.DEV
+  ? "http://localhost:82"
+  : import.meta.env.REACT_APP_BACKEND;
+
 function App() {
   const [gltf, setGltf] = useState<GLTF>();
   const [raw, setRaw] = useState<Int8Array>();
@@ -20,9 +24,7 @@ function App() {
         setRaw(bytes);
       };
 
-      fetch(
-        "http://localhost:82/3DAsset?username=JaneDoe&productId=mario"
-      ).then(handleFetch, onError);
+      fetch(backend).then(handleFetch, onError);
     };
 
     void f();
