@@ -4,7 +4,7 @@ import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const backend = import.meta.env.DEV
   ? "http://localhost:82"
-  : "http://showroom-backend-env.eba-akbq4axs.eu-north-1.elasticbeanstalk.com";
+  : "https://showroom-backend-env.eba-akbq4axs.eu-north-1.elasticbeanstalk.com";
 
 function App() {
   const [gltf, setGltf] = useState<GLTF>();
