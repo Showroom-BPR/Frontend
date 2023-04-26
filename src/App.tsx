@@ -24,7 +24,10 @@ function App() {
         setRaw(bytes);
       };
 
-      fetch(backend).then(handleFetch, onError);
+      fetch(`${backend}/3DAsset?username=JaneDoe&productId=mario`).then(
+        handleFetch,
+        onError
+      );
     };
 
     void f();
