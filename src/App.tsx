@@ -31,10 +31,10 @@ function App() {
     };
 
     void f();
-  });
+  }, []);
 
   useEffect(() => {
-    if (!raw || !raw.buffer) return;
+    if (!raw || !raw.buffer || gltf) return;
 
     loader.parse(raw.buffer, "", setGltf, onError);
   }, [raw]);
