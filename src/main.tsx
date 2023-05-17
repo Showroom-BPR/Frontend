@@ -1,13 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import "./index.css";
-import { Canvas } from "@react-three/fiber";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { LoginProvider } from "./auth-provider";
+import { ColorModeWidget } from "./color-mode-switch";
+import { Router } from "./router";
+
+const themeColors = {
+  accent: "#6224dd",
+  background: "#242424",
+};
+
+const theme = extendTheme({ themeColors });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Canvas gl={{ antialias: true, stencil: true }}>
-      <App />
-    </Canvas>
+    <ChakraProvider theme={theme}>
+      <LoginProvider>
+        <Router />
+      </LoginProvider>
+      <ColorModeWidget />
+    </ChakraProvider>
   </React.StrictMode>
 );
