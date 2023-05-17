@@ -7,7 +7,7 @@ import App from "./App";
 import { Login } from "./login";
 import { Canvas } from "@react-three/fiber";
 import { NotFound } from "./404";
-import { useLogin } from "./auth-provider";
+import { useLogin } from "./auth/auth-provider";
 
 const commonRoutes: RouteObject[] = [
   {

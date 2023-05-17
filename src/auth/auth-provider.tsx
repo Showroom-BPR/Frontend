@@ -6,7 +6,6 @@ import {
   useContext,
   useState,
 } from "react";
-import { Login } from "./login";
 import { getCognitoUserPool } from "./auth-config";
 
 type Login = {

@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
-import { useLogin } from "./auth-provider";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "./auth/auth-provider";
 
 export const NotFound = () => {
   const { currentUser } = useLogin();

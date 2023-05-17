@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { LoginProvider } from "./auth-provider";
+import { LoginProvider } from "./auth/auth-provider";
 import { ColorModeWidget } from "./color-mode-switch";
 import { Router } from "./router";
 
