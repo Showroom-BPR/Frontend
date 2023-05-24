@@ -3,16 +3,21 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import App from "./App";
-import { Login } from "./login";
+import App from "../3d/App";
+import { Login } from "../auth/login";
 import { Canvas } from "@react-three/fiber";
 import { NotFound } from "./404";
-import { useLogin } from "./auth/auth-provider";
+import { useLogin } from "../auth/auth-provider";
+import { Products } from "../products/products";
 
 const commonRoutes: RouteObject[] = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/products",
+    element: <Products />,
   },
   {
     path: "*",
@@ -34,7 +39,8 @@ const routes: RouteObject[] = [
 export const Router = () => {
   const { currentUser } = useLogin();
   const getRoutes = () => {
-    if (currentUser) {
+    // remove the ! on this to enable login-only access
+    if (!currentUser) {
       return [...commonRoutes, ...routes];
     }
 

@@ -1,6 +1,6 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
 import { useState } from "react";
-import { useLogin } from "./auth/auth-provider";
+import { useLogin } from "./auth-provider";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
