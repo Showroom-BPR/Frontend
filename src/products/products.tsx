@@ -1,5 +1,8 @@
 import { Flex, Grid, GridItem } from "@chakra-ui/react";
 import { ProductCard, Product } from "./card";
+import { useNavigate } from "react-router-dom";
+import { useLogin } from "../auth/auth-provider";
+import { useEffect } from "react";
 
 const products: Product[] = [
   {
@@ -133,6 +136,15 @@ const products: Product[] = [
 ];
 
 export const Products = () => {
+  const navigate = useNavigate();
+  const { currentUser } = useLogin();
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/login");
+    }
+  }, [currentUser]);
+
   return (
     <Flex height="full">
       <Flex width="100%">
@@ -144,14 +156,17 @@ export const Products = () => {
           padding="32px"
           overflowY="auto"
         >
-          {products.map((product) => (
+          {products.map((product, idx) => (
             <GridItem
               width="100%"
-              key={product.id}
+              key={idx}
               colSpan={1}
               cursor="pointer"
               _hover={{
                 transform: "scale(1.05)",
+              }}
+              onClick={() => {
+                navigate("/view");
               }}
             >
               <ProductCard product={product} />

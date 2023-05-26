@@ -41,6 +41,9 @@ const useAuth = () => {
       onFailure(err) {
         console.error("Amazon login error: ", err);
       },
+      newPasswordRequired() {
+        setCurrentUser(cognitoUser);
+      },
     });
   };
 

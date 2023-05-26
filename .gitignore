@@ -29,3 +29,5 @@ dist-ssr
 !.elasticbeanstalk/*.global.yml
 
 .env
+# Local assets used for testing
+*.glb

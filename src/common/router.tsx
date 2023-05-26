@@ -3,7 +3,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import App from "../3d/App";
+import App from "../3d/scene";
 import { Login } from "../auth/login";
 import { Canvas } from "@react-three/fiber";
 import { NotFound } from "./404";
@@ -16,7 +16,7 @@ const commonRoutes: RouteObject[] = [
     element: <Login />,
   },
   {
-    path: "/products",
+    path: "/",
     element: <Products />,
   },
   {
@@ -27,7 +27,7 @@ const commonRoutes: RouteObject[] = [
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: "/view",
     element: (
       <Canvas gl={{ antialias: true }}>
         <App />
@@ -40,7 +40,7 @@ export const Router = () => {
   const { currentUser } = useLogin();
   const getRoutes = () => {
     // remove the ! on this to enable login-only access
-    if (!currentUser) {
+    if (currentUser) {
       return [...commonRoutes, ...routes];
     }
 

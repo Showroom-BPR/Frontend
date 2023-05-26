@@ -5,6 +5,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { LoginProvider } from "./auth/auth-provider";
 import { ColorModeWidget } from "./common/color-mode-switch";
 import { Router } from "./common/router";
+import { Leva } from "leva";
 
 const themeColors = {
   accent: "#6224dd",
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <ChakraProvider theme={theme}>
       <LoginProvider>
         <Router />
+        <Leva />
       </LoginProvider>
       <ColorModeWidget />
     </ChakraProvider>
