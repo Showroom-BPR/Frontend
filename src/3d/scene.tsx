@@ -49,7 +49,7 @@ function App() {
         setRaw(bytes);
       };
 
-      if (!currentUser || !authToken) {
+      if (!currentUser) {
         navigate("/login");
         return;
       }
@@ -58,7 +58,7 @@ function App() {
         `${backend}/3DAsset?username=${currentUser.getUsername()}&productId=lego_man`,
         {
           headers: {
-            AUTHORIZATION_HEADER: authToken,
+            Authorization: `Bearer ${authToken}`,
           },
         }
       ).then(handleFetch, onError);
