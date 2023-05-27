@@ -14,7 +14,7 @@ function App() {
   const [raw, setRaw] = useState<Int8Array>();
   const loader = new GLTFLoader();
   const [backgroundIndex, setBackgroundIndex] = useState(0);
-  const { currentUser } = useLogin();
+  const { currentUser, authToken } = useLogin();
   const navigate = useNavigate();
   const { autoSpin, rotationSpeed, shadows } = useControls({
     autoSpin: { value: true, label: "Auto spin" },
@@ -49,13 +49,18 @@ function App() {
         setRaw(bytes);
       };
 
-      if (!currentUser) {
+      if (!currentUser || !authToken) {
         navigate("/login");
         return;
       }
 
       fetch(
-        `${backend}/3DAsset?username=${currentUser.getUsername()}&productId=lego_man`
+        `${backend}/3DAsset?username=${currentUser.getUsername()}&productId=lego_man`,
+        {
+          headers: {
+            AUTHORIZATION_HEADER: authToken,
+          },
+        }
       ).then(handleFetch, onError);
     };
 

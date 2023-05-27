@@ -12,12 +12,14 @@ type Login = {
   login: (username: string, password: string) => void;
   logout: () => void;
   currentUser: CognitoUser | undefined;
+  authToken: string | undefined;
 };
 
 const useAuth = () => {
   const [currentUser, setCurrentUser] = useState<CognitoUser | undefined>(
     undefined
   );
+  const [authToken, setAuthToken] = useState<string | undefined>();
   const cognitoUserPool = getCognitoUserPool();
 
   const login = (username: string, password: string) => {
@@ -37,6 +39,7 @@ const useAuth = () => {
       onSuccess(session) {
         console.log("Amazon login success: ", session);
         setCurrentUser(cognitoUser);
+        setAuthToken(session.getAccessToken().getJwtToken());
       },
       onFailure(err) {
         console.error("Amazon login error: ", err);
@@ -54,7 +57,7 @@ const useAuth = () => {
     setCurrentUser(undefined);
   };
 
-  return { currentUser, login, logout };
+  return { currentUser, login, logout, authToken };
 };
 
 export const LoginContext = createContext<Login | undefined>(undefined);
