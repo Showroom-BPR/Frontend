@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import App from "../3d/scene";
 import { Login } from "../auth/login";
-import { Canvas } from "@react-three/fiber";
 import { NotFound } from "./404";
 import { useLogin } from "../auth/auth-provider";
 import { Products } from "../products/products";
@@ -28,11 +27,7 @@ const commonRoutes: RouteObject[] = [
 const routes: RouteObject[] = [
   {
     path: "/view",
-    element: (
-      <Canvas gl={{ antialias: true }}>
-        <App />
-      </Canvas>
-    ),
+    element: <App />,
   },
 ];
 

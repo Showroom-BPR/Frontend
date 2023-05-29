@@ -23,6 +23,7 @@ export const ColorModeWidget = () => {
       justifyContent="center"
       alignItems="center"
       onClick={toggleColorMode}
+      zIndex={99}
     >
       {icon}
     </Button>
