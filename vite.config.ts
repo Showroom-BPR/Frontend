@@ -8,9 +8,6 @@ export default defineConfig({
     port: 8080,
   },
   envPrefix: "REACT_APP_",
-  define: {
-    global: "globalThis",
-  },
   build: {
     sourcemap: true,
   },
