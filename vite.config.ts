@@ -12,6 +12,6 @@ export default defineConfig({
     global: "globalThis",
   },
   build: {
-    sourcemap: "inline",
+    sourcemap: true,
   },
 });
