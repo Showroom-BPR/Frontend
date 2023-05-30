@@ -16,6 +16,7 @@ jobs:
       - name: Make envfile
         shell: bash
         run: |
+          touch .env
           echo "
           REACT_APP_BACKEND= ${{ secrets.REACT_APP_BACKEND }}
           REACT_APP_AUTH_USER_POOL_ID= ${{ secrets.REACT_APP_AUTH_USER_POOL_ID }}
