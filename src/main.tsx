@@ -19,7 +19,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <ChakraProvider theme={theme}>
       <LoginProvider>
         <Router />
-        <Leva />
       </LoginProvider>
       <ColorModeWidget />
     </ChakraProvider>
