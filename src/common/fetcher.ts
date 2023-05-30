@@ -5,10 +5,21 @@ export type RawImage = {
   name: string;
 };
 
-const backend = import.meta.env.DEV ? "http://localhost:80" : "";
-
 export const useFetcher = () => {
   const { authToken } = useLogin();
+  const getBackend = () => {
+    if (import.meta.env.DEV) {
+      return "http://localhost:80";
+    }
+
+    const url = import.meta.env.REACT_APP_BACKEND;
+    if (!url) {
+      throw new Error("No backend URL specified for the environment");
+    }
+
+    return url;
+  };
+  const backend = getBackend();
 
   const handleAssetFetch = async () => {
     const rawResponse = await fetch(`${backend}/3DAsset?productId=lego_man`, {
