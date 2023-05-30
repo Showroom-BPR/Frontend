@@ -31,7 +31,7 @@ jobs:
         with:
           aws_access_key: "${{ secrets.ACCESS_KEY }}"
           aws_secret_key: "${{ secrets.SECRET_KEY }}"
-          application_name: "showroom-frontend"
+          application_name: "Showroom-frontend"
           environment_name: "Showroom-frontend-env"
           version_label: "showroom-${{ steps.format-time.outputs.replaced }}"
           region: eu-north-1
