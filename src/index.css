@@ -30,7 +30,3 @@ body {
   background-size: cover !important;
   background-repeat: no-repeat !important;
 }
-
-[class*="leva"] {
-  z-index: 1500 !important;
-}

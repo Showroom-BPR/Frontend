@@ -1,6 +1,6 @@
 import { useLogin } from "../auth/auth-provider";
 
-type RawImage = {
+export type RawImage = {
   dataStream: string;
   name: string;
 };
@@ -46,9 +46,8 @@ export const useFetcher = () => {
       },
     });
     const array: RawImage[] = await rawResponse.json();
-    const results = array.map(({ dataStream }) => dataStream);
 
-    return results;
+    return array;
   };
 
   return { handleAssetFetch, handleWatermarkFetch, handleBackgroundFetch };

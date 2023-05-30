@@ -16,7 +16,6 @@ export const Watermark = () => {
   useEffect(() => {
     const f = async () => {
       const base64 = await handleWatermarkFetch();
-      console.log(base64);
       setWatermarkData(base64);
     };
 

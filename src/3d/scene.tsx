@@ -5,10 +5,10 @@ import { Model } from "./model";
 import { Backgrounds } from "./backgrounds";
 import { Canvas } from "@react-three/fiber";
 import { Watermark } from "./watermark";
-import { useFetcher } from "../common/fetcher";
+import { RawImage, useFetcher } from "../common/fetcher";
 
 function App() {
-  const [backgrounds, setBackgrounds] = useState<string[]>([]);
+  const [backgrounds, setBackgrounds] = useState<RawImage[]>([]);
   const { handleBackgroundFetch } = useFetcher();
   const { autoSpin, rotationSpeed, shadows } = useControls({
     autoSpin: { value: true, label: "Auto spin" },
@@ -18,7 +18,7 @@ function App() {
       min: 0,
       max: 10,
       step: 1,
-      label: "Rotatio speed",
+      label: "Rotation speed",
     },
   });
 

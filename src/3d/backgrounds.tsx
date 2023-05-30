@@ -1,48 +1,35 @@
-import { useControls, buttonGroup } from "leva";
-import {
-  ButtonGroupInputOpts,
-  ButtonGroupOpts,
-} from "leva/dist/declarations/src/types";
-import { useEffect, useState } from "react";
+import { useControls } from "leva";
+import { useEffect } from "react";
+import { RawImage } from "../common/fetcher";
 
 type Props = {
-  bg: string[];
+  bg: RawImage[];
 };
 
 export const Backgrounds = ({ bg }: Props) => {
-  const [backgroundIndex, setBackgroundIndex] = useState(0);
-  const buttons = () => {
-    const array = bg.map((_, idx) => {
-      const button: ButtonGroupOpts = {
-        ["" + idx]: () => {
-          setBackgroundIndex(idx);
-        },
-      };
-
-      return button;
-    });
-
-    const buttonGroup: ButtonGroupInputOpts = {};
-    array.forEach((button) => Object.assign(buttonGroup, button));
-
-    return buttonGroup;
+  const items = () => {
+    const options = {};
+    bg.forEach((background) =>
+      Object.assign(options, {
+        [background.name]: background.name,
+      })
+    );
+    return options;
   };
 
-  useControls({
-    Backgrounds: buttonGroup(buttons()),
-  });
-
-  useEffect(() => {
-    return () => {
-      document.body.style.backgroundImage = "none";
-    };
+  const { Backgrounds } = useControls({
+    Backgrounds: {
+      value: bg[0].name,
+      options: items(),
+    },
   });
 
   useEffect(() => {
     if (bg.length === 0) return;
-    const background = bg[backgroundIndex];
-    document.body.style.backgroundImage = `url(data:image/png;base64,${background})`;
-  }, [backgroundIndex]);
+    const background = bg.find((b) => b.name === Backgrounds);
+    if (!background) return;
+    document.body.style.backgroundImage = `url(data:image/png;base64,${background.dataStream})`;
+  }, [Backgrounds]);
 
   return null;
 };

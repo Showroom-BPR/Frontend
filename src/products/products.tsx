@@ -140,6 +140,10 @@ export const Products = () => {
   const { currentUser } = useLogin();
 
   useEffect(() => {
+    document.body.style.backgroundImage = "none";
+  }, []);
+
+  useEffect(() => {
     if (!currentUser) {
       navigate("/login");
     }
