@@ -37,7 +37,6 @@ const useAuth = () => {
 
     cognitoUser.authenticateUser(authDetails, {
       onSuccess(session) {
-        console.log("Amazon login success: ", session);
         setAuthToken(session.getAccessToken().getJwtToken());
         setCurrentUser(cognitoUser);
       },
