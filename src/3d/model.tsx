@@ -4,10 +4,7 @@ import { useLogin } from "../auth/auth-provider";
 import { OrbitControls } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 import { useFetcher } from "../common/fetcher";
-
-const backend = import.meta.env.DEV
-  ? "http://showroom-backend.eu-north-1.elasticbeanstalk.com"
-  : "";
+import { Animations } from "./animations";
 
 type Props = {
   autoSpin: boolean;
@@ -61,6 +58,7 @@ export const Model = ({ autoSpin, rotationSpeed }: Props) => {
         enableZoom
         enableDamping
       />
+      <Animations animations={gltf.animations} asset={gltf} />
     </primitive>
   );
 };

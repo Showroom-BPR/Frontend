@@ -10,9 +10,8 @@ import { RawImage, useFetcher } from "../common/fetcher";
 function App() {
   const [backgrounds, setBackgrounds] = useState<RawImage[]>([]);
   const { handleBackgroundFetch } = useFetcher();
-  const { autoSpin, rotationSpeed, shadows } = useControls({
+  const { autoSpin, rotationSpeed } = useControls({
     autoSpin: { value: true, label: "Auto spin" },
-    shadows: { value: true, label: "Shadows" },
     rotationSpeed: {
       value: 1,
       min: 0,
@@ -40,7 +39,7 @@ function App() {
       }}
     >
       <Suspense fallback={null}>
-        <Stage preset={"rembrandt"} shadows={shadows} adjustCamera>
+        <Stage preset={"rembrandt"} adjustCamera>
           <Model autoSpin={autoSpin} rotationSpeed={rotationSpeed} />
         </Stage>
         <Watermark />

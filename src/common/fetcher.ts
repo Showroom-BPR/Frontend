@@ -5,22 +5,17 @@ export type RawImage = {
   name: string;
 };
 
-const backend = import.meta.env.DEV
-  ? "http://showroom-backend.eu-north-1.elasticbeanstalk.com"
-  : "";
+const backend = import.meta.env.DEV ? "http://localhost:80" : "";
 
 export const useFetcher = () => {
   const { authToken } = useLogin();
 
   const handleAssetFetch = async () => {
-    const rawResponse = await fetch(
-      `${backend}/3DAsset?productId=lego_dead_pool`,
-      {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      }
-    );
+    const rawResponse = await fetch(`${backend}/3DAsset?productId=lego_man`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
     const response = await rawResponse.json();
     const byteData: number[] = Object.values(response);
     const bytes = new Int8Array(byteData);
