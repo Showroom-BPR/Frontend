@@ -13,12 +13,14 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
-      - name: inject env variables
-        uses: ./.github/actions/input-env
-        with:
-          REACT_APP_BACKEND: ${{ secrets.REACT_APP_BACKEND }}
-          REACT_APP_AUTH_USER_POOL_ID: ${{ secrets.REACT_APP_AUTH_USER_POOL_ID }}
-          REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID: ${{ secrets.REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID }}
+      - name: Make envfile
+        shell: bash
+        run: |
+          echo "
+          REACT_APP_BACKEND= ${{ secrets.REACT_APP_BACKEND }}
+          REACT_APP_AUTH_USER_POOL_ID= ${{ secrets.REACT_APP_AUTH_USER_POOL_ID }}}
+          REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID= ${{ secrets.REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID }}
+          " >> .env
       - name: generate deployment package
         run: zip -r deploy.zip * -x "**.git**"
       - name: get current timestamp
