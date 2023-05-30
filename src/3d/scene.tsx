@@ -25,6 +25,7 @@ function App() {
   useEffect(() => {
     const f = async () => {
       const bg = await handleBackgroundFetch();
+
       setBackgrounds(bg);
     };
 
@@ -43,7 +44,7 @@ function App() {
           <Model autoSpin={autoSpin} rotationSpeed={rotationSpeed} />
         </Stage>
         <Watermark />
-        <Backgrounds bg={backgrounds} />
+        {backgrounds.length > 0 && <Backgrounds bg={backgrounds} />}
       </Suspense>
     </Canvas>
   );

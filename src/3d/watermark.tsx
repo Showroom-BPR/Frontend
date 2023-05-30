@@ -16,6 +16,7 @@ export const Watermark = () => {
   useEffect(() => {
     const f = async () => {
       const base64 = await handleWatermarkFetch();
+      console.log(base64);
       setWatermarkData(base64);
     };
 
@@ -34,7 +35,7 @@ export const Watermark = () => {
       prepend
     >
       <img
-        src={watermarkData}
+        src={`data:image/png;base64,${watermarkData}`}
         draggable={false}
         style={{
           pointerEvents: "none",
