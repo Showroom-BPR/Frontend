@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@main
-      - name: inject env variables  
-        uses: ./actions/input-env
+      - name: inject env variables
+        uses: ./actions
         with:
           REACT_APP_BACKEND: ${{ secrets.REACT_APP_BACKEND }}
           REACT_APP_AUTH_USER_POOL_ID: ${{ secrets.REACT_APP_AUTH_USER_POOL_ID }}
