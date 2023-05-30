@@ -1,0 +1,29 @@
+name: input-env
+description: Add environment variables to .env file for production build
+
+inputs:
+  REACT_APP_BACKEND:
+    description: Backend URL
+    required: true
+  REACT_APP_AUTH_USER_POOL_ID:
+    description: Cognito User Pool ID
+    required: true
+  REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID:
+    description: Cognito User Pool Web Client ID
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build Development
+      shell: bash
+      env:
+        REACT_APP_BACKEND: ${{inputs.REACT_APP_BACKEND}}
+        REACT_APP_AUTH_USER_POOL_ID: ${{inputs.REACT_APP_AUTH_USER_POOL_ID}}
+        REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID: ${{inputs.REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID}}
+      run: |
+        echo "
+        REACT_APP_BACKEND=$REACT_APP_BACKEND
+        REACT_APP_AUTH_USER_POOL_ID=$REACT_APP_AUTH_USER_POOL_ID
+        REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID=$REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID
+        " >> .env
