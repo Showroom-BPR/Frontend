@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build NODE_OPTIONS=\"--max_old_space_size=8192\"",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "docker-build": "docker build -f ./Dockerfile -t showroom ."
   },
