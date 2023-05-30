@@ -12,9 +12,9 @@ jobs:
         node-version: [17.x]
     steps:
       - name: checkout repo
-        uses: actions/checkout@main
+        uses: actions/checkout@v3
       - name: inject env variables
-        uses: ./actions/input-env
+        uses: ./.github/actions/input-env
         with:
           REACT_APP_BACKEND: ${{ secrets.REACT_APP_BACKEND }}
           REACT_APP_AUTH_USER_POOL_ID: ${{ secrets.REACT_APP_AUTH_USER_POOL_ID }}
