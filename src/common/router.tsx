@@ -26,7 +26,7 @@ const commonRoutes: RouteObject[] = [
 
 const routes: RouteObject[] = [
   {
-    path: "/view",
+    path: "/view/:id",
     element: <App />,
   },
 ];

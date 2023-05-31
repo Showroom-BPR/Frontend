@@ -9,7 +9,7 @@ export const useFetcher = () => {
   const { authToken } = useLogin();
   const getBackend = () => {
     if (import.meta.env.DEV) {
-      return "http://localhost:80";
+      return "http://showroom-backend.eu-north-1.elasticbeanstalk.com";
     }
 
     const url = import.meta.env.REACT_APP_BACKEND;
@@ -21,8 +21,19 @@ export const useFetcher = () => {
   };
   const backend = getBackend();
 
-  const handleAssetFetch = async () => {
-    const rawResponse = await fetch(`${backend}/3DAsset?productId=lego_man`, {
+  const handleProductFetch = async () => {
+    const rawResponse = await fetch(`${backend}/productIds`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    const response: string[] = await rawResponse.json();
+    return response;
+  };
+
+  const handleAssetFetch = async (id: string) => {
+    const rawResponse = await fetch(`${backend}/3DAsset?productId=${id}`, {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
@@ -56,5 +67,10 @@ export const useFetcher = () => {
     return array;
   };
 
-  return { handleAssetFetch, handleWatermarkFetch, handleBackgroundFetch };
+  return {
+    handleAssetFetch,
+    handleWatermarkFetch,
+    handleBackgroundFetch,
+    handleProductFetch,
+  };
 };

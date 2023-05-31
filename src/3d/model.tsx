@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLogin } from "../auth/auth-provider";
 import { OrbitControls } from "@react-three/drei";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFetcher } from "../common/fetcher";
 import { Animations } from "./animations";
 
@@ -18,6 +18,7 @@ export const Model = ({ autoSpin, rotationSpeed }: Props) => {
   const { currentUser } = useLogin();
   const navigate = useNavigate();
   const { handleAssetFetch } = useFetcher();
+  const { id } = useParams();
 
   const onError = (e: ErrorEvent | Error) => {
     console.error(e);
@@ -29,7 +30,12 @@ export const Model = ({ autoSpin, rotationSpeed }: Props) => {
         navigate("/login");
         return;
       }
-      const result = await handleAssetFetch();
+      console.log(id);
+      if (!id) {
+        navigate("/products");
+        return;
+      }
+      const result = await handleAssetFetch(id);
       setRaw(result);
     };
 

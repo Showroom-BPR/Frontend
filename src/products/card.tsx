@@ -1,18 +1,12 @@
 import { Card, CardBody, Flex, Text } from "@chakra-ui/react";
 
-export type Product = {
-  id: number;
-  name: string;
-  theme: string;
-  image?: string;
-};
-
 type Props = {
-  product: Product;
+  product: string;
 };
 
 export const ProductCard = ({ product }: Props) => {
-  const image = product.image ?? "placeholder-image.png";
+  const image = "placeholder-image.png";
+  const random = () => Math.floor(Math.random() * 899999 + 100000);
 
   return (
     <Card borderRadius="8px" flexDirection="column" height="400px" width="100%">
@@ -31,10 +25,9 @@ export const ProductCard = ({ product }: Props) => {
           padding="16px"
         >
           <Text color="orange.500" fontSize="xl" fontWeight="bolder">
-            {product.id}
+            {random()}
           </Text>
-          <Text>{product.name}</Text>
-          <Text fontSize="lg">{product.theme}</Text>
+          <Text>{product}</Text>
         </Flex>
       </CardBody>
     </Card>

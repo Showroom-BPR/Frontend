@@ -1,143 +1,15 @@
 import { Flex, Grid, GridItem } from "@chakra-ui/react";
-import { ProductCard, Product } from "./card";
+import { ProductCard } from "./card";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../auth/auth-provider";
-import { useEffect } from "react";
-
-const products: Product[] = [
-  {
-    id: 143563,
-    name: "Cool truck",
-    theme: "Cars & Such",
-    image:
-      "https://www.lego.com/cdn/cs/set/assets/blt22104f90cf1009c9/10317.png?fit=bounds&format=webply&quality=80&width=320&height=320&dpr=2",
-  },
-  {
-    id: 594543,
-    name: "Cool airplane",
-    theme: "Planes & Such",
-  },
-  {
-    id: 434214,
-    name: "Cool bed",
-    theme: "Furniture & Such",
-  },
-  {
-    id: 108508,
-    name: "Cool plant",
-    theme: "Plants & Such",
-  },
-  {
-    id: 959855,
-    name: "Cool flag",
-    theme: "Flags & Such",
-    image:
-      "https://www.lego.com/cdn/cs/set/assets/blt22104f90cf1009c9/10317.png?fit=bounds&format=webply&quality=80&width=320&height=320&dpr=2",
-  },
-  {
-    id: 143944,
-    name: "Cool chair",
-    theme: "Furniture & Such",
-  },
-  {
-    id: 143563,
-    name: "Cool truck",
-    theme: "Cars & Such",
-  },
-  {
-    id: 594543,
-    name: "Cool airplane",
-    theme: "Planes & Such",
-  },
-  {
-    id: 434214,
-    name: "Cool bed",
-    theme: "Furniture & Such",
-  },
-  {
-    id: 108508,
-    name: "Cool plant",
-    theme: "Plants & Such",
-  },
-  {
-    id: 959855,
-    name: "Cool flag",
-    theme: "Flags & Such",
-  },
-  {
-    id: 143944,
-    name: "Cool chair",
-    theme: "Furniture & Such",
-  },
-  {
-    id: 143563,
-    name: "Cool truck",
-    theme: "Cars & Such",
-  },
-  {
-    id: 594543,
-    name: "Cool airplane",
-    theme: "Planes & Such",
-    image:
-      "https://www.lego.com/cdn/cs/set/assets/blt22104f90cf1009c9/10317.png?fit=bounds&format=webply&quality=80&width=320&height=320&dpr=2",
-  },
-  {
-    id: 434214,
-    name: "Cool bed",
-    theme: "Furniture & Such",
-  },
-  {
-    id: 108508,
-    name: "Cool plant",
-    theme: "Plants & Such",
-  },
-  {
-    id: 959855,
-    name: "Cool flag",
-    theme: "Flags & Such",
-  },
-  {
-    id: 143944,
-    name: "Cool chair",
-    theme: "Furniture & Such",
-    image:
-      "https://www.lego.com/cdn/cs/set/assets/blt22104f90cf1009c9/10317.png?fit=bounds&format=webply&quality=80&width=320&height=320&dpr=2",
-  },
-  {
-    id: 143563,
-    name: "Cool truck",
-    theme: "Cars & Such",
-  },
-  {
-    id: 594543,
-    name: "Cool airplane",
-    theme: "Planes & Such",
-  },
-  {
-    id: 434214,
-    name: "Cool bed",
-    theme: "Furniture & Such",
-  },
-  {
-    id: 108508,
-    name: "Cool plant",
-    theme: "Plants & Such",
-  },
-  {
-    id: 959855,
-    name: "Cool flag",
-    theme: "Flags & Such",
-  },
-  {
-    id: 143944,
-    name: "Cool chair",
-    theme: "Furniture & Such",
-  },
-];
+import { useEffect, useState } from "react";
+import { useFetcher } from "../common/fetcher";
 
 export const Products = () => {
   const navigate = useNavigate();
   const { currentUser } = useLogin();
+  const { handleProductFetch } = useFetcher();
+  const [products, setProducts] = useState<string[]>([]);
 
   useEffect(() => {
     document.body.style.backgroundImage = "none";
@@ -148,6 +20,15 @@ export const Products = () => {
       navigate("/login");
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    const f = async () => {
+      const response = await handleProductFetch();
+      setProducts(response);
+    };
+
+    void f();
+  }, []);
 
   return (
     <Flex height="full">
@@ -170,7 +51,7 @@ export const Products = () => {
                 transform: "scale(1.05)",
               }}
               onClick={() => {
-                navigate("/view");
+                navigate(`/view/${product}`);
               }}
             >
               <ProductCard product={product} />
